@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shattuck.Runtime", "Shattuck.Runtime\Shattuck.Runtime.csproj", "{EFE92296-721B-48B3-B0E0-B992E8889654}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shattuck.Runtime", "Shattuck.Runtime\Shattuck.Runtime.csproj", "{EFE92296-721B-48B3-B0E0-B992E8889654}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shattuck.Tests", "Shattuck.Tests\Shattuck.Tests.csproj", "{ECD45955-6AFD-498A-BF87-9901DB56C087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shattuck.Tests", "Shattuck.Tests\Shattuck.Tests.csproj", "{ECD45955-6AFD-498A-BF87-9901DB56C087}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EFE92296-721B-48B3-B0E0-B992E8889654} = {EFE92296-721B-48B3-B0E0-B992E8889654}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D0A452E7-41CC-45FB-A5C9-E160B7062D61}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.txt = ReadMe.txt
 	EndProjectSection
 EndProject
 Global

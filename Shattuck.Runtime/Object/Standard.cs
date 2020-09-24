@@ -1,13 +1,16 @@
-﻿namespace Shattuck.Runtime.Object
+﻿using System.Collections.Generic;
+
+namespace Shattuck.Runtime.Object
 {
     public class Standard : IObject
     {
-        public IObject[] Storage { get; }
+        readonly IObject[] storage;
+        public IList<IObject> Storage { get => storage; }
         public ObjectLayout Layout { get; }
 
         public Standard(ObjectLayout layout)
         {
-            Storage = new IObject[layout.StateMap.Count];
+            storage = new IObject[layout.StateMap.Count];
             Layout = layout;
         }
     }

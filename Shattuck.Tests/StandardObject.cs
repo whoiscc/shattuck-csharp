@@ -18,8 +18,9 @@ namespace Shattuck.Tests
             IObject standard = new Runtime.Object.Standard(layout);
             standard.Storage[0] = standard;
             Assert.IsNull(standard.Native);
-            Assert.AreSame(standard.Storage[standard.Layout.StateMap["self"]], standard);
+            Assert.AreSame(standard.Storage[(int)standard.Layout.StateMap["self"]], standard);
         }
+
         [TestMethod]
         public void DispatchMethod()
         {
@@ -28,7 +29,7 @@ namespace Shattuck.Tests
                 { "hello", 0 }
             };
             var helloTrait = new TraitLayout(methodMap);
-            var method = new Method();
+            var method = new Method(new Instruction[0]);
             var layout = new ObjectLayout(new Dictionary<string, uint>());
             IObject @object = new Runtime.Object.Standard(layout);
             layout.AddImplementation(helloTrait, new Dictionary<string, Method> { { "hello", method } });

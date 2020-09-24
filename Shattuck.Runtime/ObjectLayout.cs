@@ -3,7 +3,14 @@ using System.Collections.ObjectModel;
 
 namespace Shattuck.Runtime
 {
-    public class Method { }
+    public class Method
+    {
+        public Instruction[] Instructions { get; }
+        public Method(Instruction[] instructions)
+        {
+            Instructions = instructions;
+        } 
+    }
     public class ObjectLayout
     {
         public ReadOnlyDictionary<string, uint> StateMap { get; }
