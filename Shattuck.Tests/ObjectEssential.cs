@@ -5,20 +5,20 @@ using System.Collections.Generic;
 namespace Shattuck.Tests
 {
     [TestClass]
-    public class StandardObject
+    public class ObjectEssential
     {
         [TestMethod]
         public void GetStateSetState()
         {
             var stateMap = new Dictionary<string, uint>
             {
-                { "self", 0 }
+                {"self", 0}
             };
             var layout = new ObjectLayout(stateMap);
             IObject standard = new Runtime.Object.Standard(layout);
             standard.Storage[0] = standard;
             Assert.IsNull(standard.Native);
-            Assert.AreSame(standard.Storage[(int)standard.Layout.StateMap["self"]], standard);
+            Assert.AreSame(standard.Storage[(int) standard.Layout.StateMap["self"]], standard);
         }
 
         [TestMethod]
@@ -26,13 +26,13 @@ namespace Shattuck.Tests
         {
             var methodMap = new Dictionary<string, uint>
             {
-                { "hello", 0 }
+                {"hello", 0}
             };
             var helloTrait = new TraitLayout(methodMap);
             var method = new Method(new Instruction[0]);
             var layout = new ObjectLayout(new Dictionary<string, uint>());
             IObject @object = new Runtime.Object.Standard(layout);
-            layout.AddImplementation(helloTrait, new Dictionary<string, Method> { { "hello", method } });
+            layout.AddImplementation(helloTrait, new Dictionary<string, Method> {{"hello", method}});
             Assert.AreSame(@object.Layout.Dispatch(helloTrait, "hello"), method);
         }
     }

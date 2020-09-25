@@ -4,11 +4,12 @@ namespace Shattuck.Runtime.Object
 {
     public class Bool : IObject
     {
-        public IList<IObject> Storage { get => new IObject[0]; }
-        
-        static readonly ObjectLayout layout = new ObjectLayout(new Dictionary<string, uint>());
-        public ObjectLayout Layout { get => layout; }
+        public IList<IObject> Storage => new IObject[0];
 
-        public static Bool True = new Bool(), False = new Bool();
+        private static readonly ObjectLayout AssociatedLayout = 
+            new ObjectLayout(new Dictionary<string, uint>());
+        public ObjectLayout Layout => AssociatedLayout;
+
+        public static readonly Bool True = new Bool(), False = new Bool();
     }
 }

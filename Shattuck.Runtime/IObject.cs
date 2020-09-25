@@ -6,6 +6,11 @@ namespace Shattuck.Runtime
     {
         IList<IObject> Storage { get; }
         ObjectLayout Layout { get; }
-        object Native { get => null; set { } }
+
+        object Native
+        {
+            get => null;
+            set { }
+        }
     }
 }

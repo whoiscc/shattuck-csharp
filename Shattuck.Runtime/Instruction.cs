@@ -1,11 +1,12 @@
 ﻿namespace Shattuck.Runtime
 {
-    public interface Instruction
+    public class Instruction
     {
-        public readonly struct PushAttribute : Instruction
+        public class PushAttribute : Instruction
         {
             public uint Index { get; }
             public string Key { get; }
+
             public PushAttribute(uint index, string key)
             {
                 Index = index;
@@ -13,10 +14,11 @@
             }
         }
 
-        public readonly struct JumpOnNegative : Instruction
+        public class JumpOnNegative : Instruction
         {
             public uint Index { get; }
             public int Offset { get; }
+
             public JumpOnNegative(uint index, int offset)
             {
                 Index = index;
@@ -24,11 +26,12 @@
             }
         }
 
-        public readonly struct SetAttribute : Instruction
+        public class SetAttribute : Instruction
         {
             public uint Index { get; }
             public string Key { get; }
             public uint ValueIndex { get; }
+
             public SetAttribute(uint index, string key, uint valueIndex)
             {
                 Index = index;
@@ -37,10 +40,11 @@
             }
         }
 
-        public readonly struct PrepareEnvironment : Instruction
+        public class PrepareEnvironment : Instruction
         {
             public uint ContextIndex { get; }
             public uint[] ArgumentIndices { get; }
+
             public PrepareEnvironment(uint contextIndex, uint[] argumentIndices)
             {
                 ContextIndex = contextIndex;
@@ -48,22 +52,28 @@
             }
         }
 
-        public readonly struct ExhaustEnvironment : Instruction { }
+        public class ExhaustEnvironment : Instruction
+        {
+        }
 
-        public readonly struct DetachEnvironment : Instruction { }
+        public class DetachEnvironment : Instruction
+        {
+        }
 
-        public readonly struct EscapeEnvironment : Instruction
+        public class EscapeEnvironment : Instruction
         {
             public uint Index { get; }
+
             public EscapeEnvironment(uint index)
             {
                 Index = index;
             }
         }
 
-        public readonly struct TruncateEnvironment : Instruction
+        public class TruncateEnvironment : Instruction
         {
             public uint Count { get; }
+
             public TruncateEnvironment(uint count)
             {
                 Count = count;
