@@ -10,11 +10,17 @@ namespace Shattuck.Tests
         [TestMethod]
         public void RunEmptyMethod()
         {
+            var trait = new TraitLayout(new Dictionary<string, uint>
+            {
+                {"empty", 0},
+            });
+            var layout = new ObjectLayout(new Dictionary<string, uint>());
+            layout.AddImplementation(trait, new Dictionary<string, Method>
+            {
+                {"empty", new Method(new Instruction[0])}
+            });
             var runner = new Runner(
-                new Runtime.Object.Standard(new ObjectLayout(new Dictionary<string, uint>())),
-                new Method(new Instruction[0]),
-                new IObject[0]
-            );
+                new Runtime.Object.Standard(layout), trait, "empty", new IObject[0]);
             Assert.ThrowsException<Runner.ExecutionEnd>(() => runner.StepIn());
         }
     }

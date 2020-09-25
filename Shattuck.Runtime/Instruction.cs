@@ -1,4 +1,6 @@
-﻿namespace Shattuck.Runtime
+﻿using System;
+
+namespace Shattuck.Runtime
 {
     public class Instruction
     {
@@ -43,12 +45,16 @@
         public class PrepareEnvironment : Instruction
         {
             public uint ContextIndex { get; }
+            public TraitLayout Trait { get; }
+            public string Name { get; }
             public uint[] ArgumentIndices { get; }
 
-            public PrepareEnvironment(uint contextIndex, uint[] argumentIndices)
+            public PrepareEnvironment(uint contextIndex, TraitLayout trait, string name, uint[] argumentIndices)
             {
                 ContextIndex = contextIndex;
                 ArgumentIndices = argumentIndices;
+                Trait = trait;
+                Name = name;
             }
         }
 
@@ -78,6 +84,16 @@
             {
                 Count = count;
             }
+        }
+
+        public class ExecuteNative : Instruction
+        {
+            public ExecuteNative(Action<Runner> action)
+            {
+                Action = action;
+            }
+
+            public Action<Runner> Action { get; }
         }
     }
 }

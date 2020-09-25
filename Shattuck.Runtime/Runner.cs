@@ -26,10 +26,11 @@ namespace Shattuck.Runtime
     {
         readonly Stack<Environment> _stack;
 
-        public Runner(IObject entryContext, Method entryMethod, IObject[] entryArguments) :
-            this(new Environment(entryContext, entryMethod, entryArguments))
+        public Runner(IObject entryContext, TraitLayout trait, string name, IObject[] entryArguments) :
+            this(new Environment(entryContext, entryContext.Layout.Dispatch(trait, name), entryArguments))
         {
         }
+
 
         Runner(Environment env)
         {
@@ -65,15 +66,15 @@ namespace Shattuck.Runtime
             {
                 case Instruction.PushAttribute pa:
                 {
-                    IObject @object = Current.Registers[(int) pa.Index];
-                    IObject attrib = @object.Storage[(int) @object.Layout.StateMap[pa.Key]];
+                    var @object = Current.Registers[(int) pa.Index];
+                    var attrib = @object.Storage[(int) @object.Layout.StateMap[pa.Key]];
                     Current.Registers.Add(attrib);
                     return;
                 }
                 case Instruction.SetAttribute sa:
                 {
-                    IObject @object = Current.Registers[(int) sa.Index];
-                    IObject attrib = Current.Registers[(int) sa.ValueIndex];
+                    var @object = Current.Registers[(int) sa.Index];
+                    var attrib = Current.Registers[(int) sa.ValueIndex];
                     @object.Storage[(int) @object.Layout.StateMap[sa.Key]] = attrib;
                     return;
                 }
@@ -93,6 +94,11 @@ namespace Shattuck.Runtime
                     {
                         throw new IllegalInstruction();
                     }
+                }
+                case Instruction.ExecuteNative en:
+                {
+                    en.Action(this);
+                    return;
                 }
                 default:
                     throw new IllegalInstruction();
