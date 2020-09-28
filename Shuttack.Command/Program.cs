@@ -1,16 +1,25 @@
-﻿using System;
-using Shattuck.Runtime;
-using String = Shattuck.Runtime.Object.String;
+﻿using Shattuck.Runtime;
+using Shattuck.Runtime.Object;
 
 namespace Shuttack.Command
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Runner runner = new Runner(
+            var _ = args;
+            var runner = new Runner(
                 new String("cowsay"), String.NativeTrait, "print", new IObject[0]);
-            runner.StepIn();
+            try
+            {
+                while (true)
+                {
+                    runner.StepIn();
+                }
+            }
+            catch (Runner.ExecutionEnd)
+            {
+            }
         }
     }
 }

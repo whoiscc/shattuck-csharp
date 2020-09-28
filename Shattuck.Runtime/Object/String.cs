@@ -21,6 +21,7 @@ namespace Shattuck.Runtime.Object
                     "print", new Method(new Instruction[]
                     {
                         new Instruction.ExecuteNative(Print),
+                        new Instruction.EscapeEnvironment(0), 
                     })
                 }
             });
@@ -28,16 +29,23 @@ namespace Shattuck.Runtime.Object
 
         public ObjectLayout Layout => AssociatedLayout;
         public IList<IObject> Storage => new IObject[0];
-        public string Native;
+        private string _native;
+
+        public object Native
+        {
+            get => _native;
+            set => _native = (string) value;
+        }
 
         public String(string rawString)
         {
-            Native = rawString;
+            _native = rawString;
         }
 
         private static void Print(Runner runner)
         {
-            Console.Out.Write("hello, shattuck!");
+            var raw = runner.GetRegister(Runner.Context()).Native as string;
+            Console.Out.Write($"hello, {raw}!");
         }
     }
 }

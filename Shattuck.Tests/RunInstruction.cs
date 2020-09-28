@@ -17,7 +17,12 @@ namespace Shattuck.Tests
             var layout = new ObjectLayout(new Dictionary<string, uint>());
             layout.AddImplementation(trait, new Dictionary<string, Method>
             {
-                {"empty", new Method(new Instruction[0])}
+                {
+                    "empty", new Method(new Instruction[]
+                    {
+                        new Instruction.EscapeEnvironment(0),
+                    })
+                }
             });
             var runner = new Runner(
                 new Runtime.Object.Standard(layout), trait, "empty", new IObject[0]);

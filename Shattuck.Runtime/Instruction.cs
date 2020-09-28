@@ -2,7 +2,7 @@
 
 namespace Shattuck.Runtime
 {
-    public class Instruction
+    public abstract class Instruction
     {
         public class PushAttribute : Instruction
         {
